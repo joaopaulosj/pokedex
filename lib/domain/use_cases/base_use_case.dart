@@ -6,3 +6,9 @@ abstract class UseCase<Type, Params> {
 }
 
 class NoParams {}
+
+class UrlParams {
+  final String url;
+
+  UrlParams(this.url);
+}

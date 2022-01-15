@@ -1,18 +1,30 @@
 import 'package:dio/dio.dart';
 import 'package:pokedex/constants/app_network.dart';
+import 'package:pokedex/data/model/pokemon_model.dart';
 import 'package:pokedex/data/model/pokemon_type_model.dart';
-import 'package:pokedex/domain/entities/pokemon_type.dart';
+import 'package:pokedex/domain/entities/name_url_response.dart';
+import 'package:pokedex/domain/entities/pokemon.dart';
 
 class PokedexDataSource {
   final Dio dio;
 
   PokedexDataSource({required this.dio});
 
-  Future<List<PokemonType>> getTypes() async {
+  Future<List<NameUrlResponse>> getTypes() async {
     final result = await dio.get(AppNetwork.typesUrl);
     final types = List.from(result.data['results'])
-        .map((e) => PokemonTypeModel.fromJson(e))
+        .map((e) => NameUrlResponseModel.fromJson(e))
         .toList();
     return types;
+  }
+
+  Future<List<Pokemon>> getPokemonsFromType({
+    required String typeUrl,
+  }) async {
+    final result = await dio.get(typeUrl);
+    final pokemons = List.from(result.data['pokemon'])
+        .map((e) => PokemonModel.fromJson(e))
+        .toList();
+    return pokemons;
   }
 }
