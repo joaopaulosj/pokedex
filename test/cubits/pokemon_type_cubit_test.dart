@@ -79,7 +79,7 @@ void main() {
       );
 
       blocTest<PokemonTypeCubit, PokemonTypeState>(
-        'WHEN get pokemons doesnt succeed, THEN should emits the error',
+        'WHEN get pokemons doesnt succeed, THEN should emit the error',
         build: () => cubit,
         setUp: () => setFailureOnTypesUseCase(),
         act: (cubit) => cubit.loadPokemonsFromType(),
