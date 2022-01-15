@@ -4,10 +4,10 @@ import 'package:pokedex/domain/entities/name_url_response.dart';
 import 'package:pokedex/domain/repositories/pokedex_repository.dart';
 import 'package:pokedex/domain/use_cases/base_use_case.dart';
 
-class GetTypesUseCase extends UseCase<List<NameUrlResponse>, NoParams> {
+class GetPokemonTypesUseCase extends UseCase<List<NameUrlResponse>, NoParams> {
   final PokedexRepository repository;
 
-  GetTypesUseCase({required this.repository});
+  GetPokemonTypesUseCase({required this.repository});
 
   @override
   Future<Either<Failure, List<NameUrlResponse>>> call(NoParams params) {

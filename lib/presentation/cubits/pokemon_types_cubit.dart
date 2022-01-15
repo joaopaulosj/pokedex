@@ -9,7 +9,7 @@ import 'package:pokedex/domain/use_cases/get_types_use_case.dart';
 part 'pokemon_types_state.dart';
 
 class PokemonTypesCubit extends Cubit<PokemonTypesState> {
-  final GetTypesUseCase getTypesUseCase;
+  final GetPokemonTypesUseCase getTypesUseCase;
 
   PokemonTypesCubit({
     required this.getTypesUseCase,
@@ -18,7 +18,7 @@ class PokemonTypesCubit extends Cubit<PokemonTypesState> {
   Future<void> loadPokemonTypes() async {
     emit(state.copyWith(uiState: UIState.loading));
 
-    final result = await getTypesUseCase(NoParams());
+    final result = await getTypesUseCase(const NoParams());
     result.fold(
       (failure) => emit(
         state.copyWith(uiState: UIState.failure, failure: failure),

@@ -9,7 +9,7 @@ class Failure extends Equatable {
   const Failure({required this.exception, this.data});
 
   @override
-  List<Object> get props => [exception, data];
+  List<Object?> get props => [exception, data];
 
   String getMessage() {
     final error = exception;
