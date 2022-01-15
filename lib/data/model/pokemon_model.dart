@@ -19,17 +19,17 @@ class PokemonModel extends Pokemon {
     return PokemonModel(
       id: json['id'],
       name: json['name'],
-      imageUrl: '${AppNetwork.baseImageUrl}/${json['id']}.png',
+      imageUrl: '${AppNetwork.baseSpriteUrl}/${json['id']}.png',
     );
   }
 
   factory PokemonModel.fromNameUrlJson(Map<String, dynamic> json) {
-    final id = StringUtils.getIdFromUrl(json['url']);
+    final id = StringUtils.getIdFromUrl(json['pokemon']['url']);
     return PokemonModel(
       id: id,
-      name: json['name'],
-      url: json['url'],
-      imageUrl: '${AppNetwork.baseImageUrl}/$id.png',
+      name: json['pokemon']['name'],
+      url: json['pokemon']['url'],
+      imageUrl: '${AppNetwork.baseSpriteUrl}/$id.png',
     );
   }
 }

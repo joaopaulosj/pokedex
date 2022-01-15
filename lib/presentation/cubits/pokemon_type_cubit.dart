@@ -22,7 +22,6 @@ class PokemonTypeCubit extends Cubit<PokemonTypeState> {
 
   Future<void> loadPokemonsFromType() async {
     emit(state.copyWith(uiState: UIState.loading));
-
     final result = await getPokemonsFromTypeUseCase(UrlParams(typeUrl));
     result.fold(
       (failure) => emit(

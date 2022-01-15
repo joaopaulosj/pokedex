@@ -39,7 +39,6 @@ class _PageContentState extends State<_PageContent> {
         bloc: _cubit,
         buildWhen: (prev, curr) => prev.uiState != curr.uiState,
         builder: (context, state) {
-          print(state.uiState);
           if (state.uiState == UIState.loading) {
             return const Center(
               child: CircularProgressIndicator(),
