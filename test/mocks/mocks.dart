@@ -1,5 +1,6 @@
 import 'package:pokedex/domain/entities/failure.dart';
 import 'package:pokedex/domain/entities/name_url_response.dart';
+import 'package:pokedex/domain/entities/pokemon.dart';
 
 final mockFailure = Failure(exception: Exception('error'));
 
@@ -14,4 +15,42 @@ const mockPokemonTypes = <NameUrlResponse>[
   NameUrlResponse(name: 'ghost', url: 'https://pokeapi.co/api/v2/type/8/'),
   NameUrlResponse(name: 'steel', url: 'https://pokeapi.co/api/v2/type/9/'),
   NameUrlResponse(name: 'fire', url: 'https://pokeapi.co/api/v2/type/10/'),
+];
+
+const mockPokemons = <Pokemon>[
+  Pokemon(
+    id: 1,
+    name: 'bulbasaur',
+    imageUrl:
+        'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png',
+    url: 'https://pokeapi.co/api/v2/pokemon/1/',
+  ),
+  Pokemon(
+    id: 2,
+    name: 'ivysaur',
+    imageUrl:
+        'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/2.png',
+    url: 'https://pokeapi.co/api/v2/pokemon/2/',
+  ),
+  Pokemon(
+    id: 3,
+    name: 'venusaur',
+    imageUrl:
+        'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/3.png',
+    url: 'https://pokeapi.co/api/v2/pokemon/3/',
+  ),
+  Pokemon(
+    id: 4,
+    name: 'charmander',
+    imageUrl:
+        'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/4.png',
+    url: 'https://pokeapi.co/api/v2/pokemon/4/',
+  ),
+  Pokemon(
+    id: 5,
+    name: 'charmeleon',
+    imageUrl:
+        'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/5.png',
+    url: 'https://pokeapi.co/api/v2/pokemon/5/',
+  ),
 ];

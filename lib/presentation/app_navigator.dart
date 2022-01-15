@@ -11,7 +11,7 @@ class AppNavigator {
     await Modular.to.pushNamed(AppRoutes.pokemonType, arguments: typeUrl);
   }
 
-  Future openPokemon(String pokemonUrl) async {
+  Future openPokemon({required String pokemonUrl}) async {
     await Modular.to.pushNamed(AppRoutes.pokemon, arguments: pokemonUrl);
   }
 }

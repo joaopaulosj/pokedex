@@ -8,7 +8,7 @@ import 'package:pokedex/domain/use_cases/get_types_use_case.dart';
 import 'package:pokedex/presentation/app_navigator.dart';
 import 'package:pokedex/presentation/cubits/pokemon_types_cubit.dart';
 
-import 'mocks/mocks.dart';
+import '../mocks/mocks.dart';
 
 class MockGetPokemonTypesUseCase extends Mock
     implements GetPokemonTypesUseCase {}

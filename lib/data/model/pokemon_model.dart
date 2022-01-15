@@ -7,10 +7,12 @@ class PokemonModel extends Pokemon {
     required int id,
     required String name,
     required String imageUrl,
+    String? url,
   }) : super(
           id: id,
           name: name,
           imageUrl: imageUrl,
+          url: url,
         );
 
   factory PokemonModel.fromJson(Map<String, dynamic> json) {
@@ -26,6 +28,7 @@ class PokemonModel extends Pokemon {
     return PokemonModel(
       id: id,
       name: json['name'],
+      url: json['url'],
       imageUrl: '${AppNetwork.baseImageUrl}/$id.png',
     );
   }
