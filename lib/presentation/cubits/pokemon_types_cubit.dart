@@ -5,13 +5,16 @@ import 'package:pokedex/domain/entities/name_url_response.dart';
 import 'package:pokedex/domain/entities/ui_state.dart';
 import 'package:pokedex/domain/use_cases/base_use_case.dart';
 import 'package:pokedex/domain/use_cases/get_types_use_case.dart';
+import 'package:pokedex/presentation/app_navigator.dart';
 
 part 'pokemon_types_state.dart';
 
 class PokemonTypesCubit extends Cubit<PokemonTypesState> {
+  final AppNavigator appNavigator;
   final GetPokemonTypesUseCase getTypesUseCase;
 
   PokemonTypesCubit({
+    required this.appNavigator,
     required this.getTypesUseCase,
   }) : super(const PokemonTypesState());
 
@@ -27,5 +30,9 @@ class PokemonTypesCubit extends Cubit<PokemonTypesState> {
         state.copyWith(uiState: UIState.success, pokemonTypes: pokemonTypes),
       ),
     );
+  }
+
+  void onPokemonTypeSelected(NameUrlResponse pokemonType) {
+    appNavigator.openPokemonType(typeUrl: pokemonType.url);
   }
 }

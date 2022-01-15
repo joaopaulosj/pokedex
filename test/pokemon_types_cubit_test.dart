@@ -5,6 +5,7 @@ import 'package:mocktail/mocktail.dart';
 import 'package:pokedex/domain/entities/ui_state.dart';
 import 'package:pokedex/domain/use_cases/base_use_case.dart';
 import 'package:pokedex/domain/use_cases/get_types_use_case.dart';
+import 'package:pokedex/presentation/app_navigator.dart';
 import 'package:pokedex/presentation/cubits/pokemon_types_cubit.dart';
 
 import 'mocks/mocks.dart';
@@ -12,26 +13,44 @@ import 'mocks/mocks.dart';
 class MockGetPokemonTypesUseCase extends Mock
     implements GetPokemonTypesUseCase {}
 
+class MockAppNavigator extends Mock implements AppNavigator {}
+
+class FakeNoParams extends Fake implements NoParams {}
+
 void main() {
   late PokemonTypesCubit cubit;
   late GetPokemonTypesUseCase getPokemonTypesUseCase;
+  late AppNavigator appNavigator;
+
+  setUpAll(() {
+    registerFallbackValue(FakeNoParams());
+  });
 
   setUp(() {
     getPokemonTypesUseCase = MockGetPokemonTypesUseCase();
-    cubit = PokemonTypesCubit(getTypesUseCase: getPokemonTypesUseCase);
+    appNavigator = MockAppNavigator();
+    cubit = PokemonTypesCubit(
+      getTypesUseCase: getPokemonTypesUseCase,
+      appNavigator: appNavigator,
+    );
   });
 
   tearDown(() {
     cubit.close();
   });
 
+  void setupAppNavigation() {
+    when(() => appNavigator.openPokemonType(typeUrl: any(named: 'typeUrl')))
+        .thenAnswer((_) => Future.value(''));
+  }
+
   void setSuccessOnTypesUseCase() {
-    when(() => getPokemonTypesUseCase(const NoParams()))
+    when(() => getPokemonTypesUseCase(any()))
         .thenAnswer((_) async => const Right(mockPokemonTypes));
   }
 
   void setFailureOnTypesUseCase() {
-    when(() => getPokemonTypesUseCase(const NoParams()))
+    when(() => getPokemonTypesUseCase(any()))
         .thenAnswer((_) async => Left(mockFailure));
   }
 
@@ -67,6 +86,26 @@ void main() {
           const PokemonTypesState(uiState: UIState.loading),
           PokemonTypesState(uiState: UIState.failure, failure: mockFailure),
         ],
+      );
+    },
+  );
+
+  group(
+    'interactions',
+    () {
+      test(
+        'WHEN user taps on a type, THEN should navigate to type',
+        () {
+          //Arrange
+          setupAppNavigation();
+          final type = mockPokemonTypes[0];
+
+          //Act
+          cubit.onPokemonTypeSelected(type);
+
+          //Assert
+          verify(() => appNavigator.openPokemonType(typeUrl: type.url));
+        },
       );
     },
   );
