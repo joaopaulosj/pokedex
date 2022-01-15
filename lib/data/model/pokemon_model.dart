@@ -14,6 +14,14 @@ class PokemonModel extends Pokemon {
         );
 
   factory PokemonModel.fromJson(Map<String, dynamic> json) {
+    return PokemonModel(
+      id: json['id'],
+      name: json['name'],
+      imageUrl: '${AppNetwork.baseImageUrl}/${json['id']}.png',
+    );
+  }
+
+  factory PokemonModel.fromNameUrlJson(Map<String, dynamic> json) {
     final id = StringUtils.getIdFromUrl(json['url']);
     return PokemonModel(
       id: id,

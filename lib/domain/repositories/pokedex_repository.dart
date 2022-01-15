@@ -9,4 +9,6 @@ abstract class PokedexRepository {
   Future<Either<Failure, List<Pokemon>>> getPokemonsFromType({
     required String typeUrl,
   });
+
+  Future<Either<Failure, Pokemon>> getPokemon({required String pokemonUrl});
 }

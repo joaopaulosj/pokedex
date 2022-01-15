@@ -23,8 +23,13 @@ class PokedexDataSource {
   }) async {
     final result = await dio.get(typeUrl);
     final pokemons = List.from(result.data['pokemon'])
-        .map((e) => PokemonModel.fromJson(e))
+        .map((e) => PokemonModel.fromNameUrlJson(e))
         .toList();
     return pokemons;
+  }
+
+  Future<Pokemon> getPokemon({required String pokemonUrl}) async {
+    final result = await dio.get(pokemonUrl);
+    return PokemonModel.fromJson(result.data);
   }
 }
