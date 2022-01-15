@@ -51,6 +51,8 @@ class _PageContentState extends State<_PageContent> {
                 final type = state.pokemonTypes[index];
                 return ListTile(
                   title: Text(type.name),
+                  subtitle: Text(type.url),
+                  onTap: () => _cubit.onPokemonTypeSelected(type),
                 );
               },
             );
