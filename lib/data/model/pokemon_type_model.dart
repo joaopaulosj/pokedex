@@ -1,6 +1,6 @@
-import 'package:pokedex/domain/entities/name_url_response.dart';
+import 'package:pokedex/domain/entities/pokemon_type.dart';
 
-class NameUrlResponseModel extends NameUrlResponse {
+class NameUrlResponseModel extends PokemonType {
   const NameUrlResponseModel({
     required String name,
     required String url,

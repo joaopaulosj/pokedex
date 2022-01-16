@@ -34,7 +34,7 @@ class FailureWidget extends StatelessWidget {
           ),
           const SizedBox(height: kMarginDefault),
           ElevatedButton(
-            child: Text(AppStrings.shared.retry),
+            child: const Text(AppStrings.retry),
             onPressed: onRetry,
           ),
         ],

@@ -1,5 +1,6 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:dartz/dartz.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:pokedex/domain/entities/ui_state.dart';
@@ -25,7 +26,7 @@ void main() {
     getPokemonUseCase = MockGetPokemonUseCase();
     cubit = PokemonCubit(
       getPokemonUseCase: getPokemonUseCase,
-      pokemonUrl: 'https://pokemon.com',
+      args: PokemonArgs(pokemon: mockPokemons[0], color: Colors.blue),
     );
   });
 
@@ -58,7 +59,7 @@ void main() {
         setUp: () => setSuccessOnTypesUseCase(),
         act: (cubit) => cubit.loadPokemon(),
         expect: () => [
-          const PokemonState(uiState: UIState.loading),
+          PokemonState(uiState: UIState.loading, pokemon: mockPokemons[0]),
           PokemonState(
             uiState: UIState.success,
             pokemon: mockPokemons[0],
@@ -72,8 +73,12 @@ void main() {
         setUp: () => setFailureOnTypesUseCase(),
         act: (cubit) => cubit.loadPokemon(),
         expect: () => [
-          const PokemonState(uiState: UIState.loading),
-          PokemonState(uiState: UIState.failure, failure: mockFailure),
+          PokemonState(uiState: UIState.loading, pokemon: mockPokemons[0]),
+          PokemonState(
+            uiState: UIState.failure,
+            failure: mockFailure,
+            pokemon: mockPokemons[0],
+          ),
         ],
       );
     },

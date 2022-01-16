@@ -1,10 +1,10 @@
 import 'package:equatable/equatable.dart';
 
-class NameUrlResponse extends Equatable {
+class PokemonType extends Equatable {
   final String name;
   final String url;
 
-  const NameUrlResponse({
+  const PokemonType({
     required this.name,
     required this.url,
   });

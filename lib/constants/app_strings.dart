@@ -1,13 +1,7 @@
 class AppStrings {
-  static const shared = SharedStrings();
-}
-
-class SharedStrings {
-  const SharedStrings();
-
-  String get appName => 'Pokedex';
-
-  String get unknownError => 'Unknown Error';
-
-  String get retry => 'Retry';
+  static const String appName = 'Pokedex';
+  static const String unknownError = 'Unknown Error';
+  static const String retry = 'Retry';
+  static const String height = 'Height';
+  static const String weight = 'Weight';
 }

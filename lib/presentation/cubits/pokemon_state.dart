@@ -2,13 +2,13 @@ part of 'pokemon_cubit.dart';
 
 class PokemonState extends Equatable {
   final UIState uiState;
+  final Pokemon pokemon;
   final Failure? failure;
-  final Pokemon? pokemon;
 
   const PokemonState({
     this.uiState = UIState.initial,
+    required this.pokemon,
     this.failure,
-    this.pokemon,
   });
 
   @override

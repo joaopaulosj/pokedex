@@ -1,7 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:pokedex/domain/entities/failure.dart';
-import 'package:pokedex/domain/entities/name_url_response.dart';
+import 'package:pokedex/domain/entities/pokemon_type.dart';
 import 'package:pokedex/domain/entities/ui_state.dart';
 import 'package:pokedex/domain/use_cases/base_use_case.dart';
 import 'package:pokedex/domain/use_cases/get_types_use_case.dart';
@@ -32,7 +32,7 @@ class PokemonTypesCubit extends Cubit<PokemonTypesState> {
     );
   }
 
-  void onPokemonTypeSelected(NameUrlResponse pokemonType) {
-    appNavigator.openPokemonType(typeUrl: pokemonType.url);
+  void onPokemonTypeSelected(PokemonType pokemonType) {
+    appNavigator.openPokemonType(pokemonType: pokemonType);
   }
 }

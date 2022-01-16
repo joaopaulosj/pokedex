@@ -3,7 +3,7 @@ part of 'pokemon_types_cubit.dart';
 class PokemonTypesState extends Equatable {
   final UIState uiState;
   final Failure? failure;
-  final List<NameUrlResponse> pokemonTypes;
+  final List<PokemonType> pokemonTypes;
 
   const PokemonTypesState({
     this.uiState = UIState.initial,
@@ -17,7 +17,7 @@ class PokemonTypesState extends Equatable {
   PokemonTypesState copyWith({
     UIState? uiState,
     Failure? failure,
-    List<NameUrlResponse>? pokemonTypes,
+    List<PokemonType>? pokemonTypes,
   }) {
     return PokemonTypesState(
       uiState: uiState ?? this.uiState,

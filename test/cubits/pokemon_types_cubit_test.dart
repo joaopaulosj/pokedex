@@ -2,6 +2,7 @@ import 'package:bloc_test/bloc_test.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
+import 'package:pokedex/domain/entities/pokemon_type.dart';
 import 'package:pokedex/domain/entities/ui_state.dart';
 import 'package:pokedex/domain/use_cases/base_use_case.dart';
 import 'package:pokedex/domain/use_cases/get_types_use_case.dart';
@@ -17,6 +18,8 @@ class MockAppNavigator extends Mock implements AppNavigator {}
 
 class FakeNoParams extends Fake implements NoParams {}
 
+class FakePokemonType extends Fake implements PokemonType {}
+
 void main() {
   late PokemonTypesCubit cubit;
   late GetPokemonTypesUseCase getPokemonTypesUseCase;
@@ -24,6 +27,7 @@ void main() {
 
   setUpAll(() {
     registerFallbackValue(FakeNoParams());
+    registerFallbackValue(FakePokemonType());
   });
 
   setUp(() {
@@ -40,7 +44,8 @@ void main() {
   });
 
   void setupAppNavigation() {
-    when(() => appNavigator.openPokemonType(typeUrl: any(named: 'typeUrl')))
+    when(() => appNavigator.openPokemonType(
+            pokemonType: any(named: 'pokemonType')))
         .thenAnswer((_) => Future.value(''));
   }
 
@@ -104,7 +109,7 @@ void main() {
           cubit.onPokemonTypeSelected(type);
 
           //Assert
-          verify(() => appNavigator.openPokemonType(typeUrl: type.url));
+          verify(() => appNavigator.openPokemonType(pokemonType: type));
         },
       );
     },

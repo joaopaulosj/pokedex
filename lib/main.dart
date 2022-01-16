@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:pokedex/constants/app_strings.dart';
 
 import 'app_module.dart';
@@ -19,8 +20,10 @@ class AppWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: AppStrings.shared.appName,
-      theme: ThemeData(primarySwatch: Colors.blue),
+      title: AppStrings.appName,
+      theme: ThemeData(primarySwatch: Colors.blue).copyWith(
+        textTheme: GoogleFonts.pressStart2pTextTheme(),
+      ),
       debugShowCheckedModeBanner: false,
     ).modular();
   }

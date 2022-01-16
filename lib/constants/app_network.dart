@@ -7,4 +7,6 @@ class AppNetwork {
 
   static const String baseSpriteUrl =
       'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon';
+
+  static const String basePokemonUrl = '$baseUrl/pokemon';
 }

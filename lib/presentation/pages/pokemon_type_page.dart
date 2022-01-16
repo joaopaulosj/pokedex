@@ -24,7 +24,7 @@ class _PageContent extends StatefulWidget {
 }
 
 class _PageContentState extends State<_PageContent> {
-  PokemonTypeCubit get _cubit => Modular.get<PokemonTypeCubit>();
+  PokemonTypeCubit get _cubit => BlocProvider.of<PokemonTypeCubit>(context);
 
   @override
   void initState() {
@@ -53,7 +53,10 @@ class _PageContentState extends State<_PageContent> {
                   leading: SizedBox(
                     height: 64,
                     width: 64,
-                    child: CachedNetworkImage(imageUrl: pokemon.imageUrl),
+                    child: Hero(
+                      tag: pokemon.imageUrl,
+                      child: CachedNetworkImage(imageUrl: pokemon.imageUrl),
+                    ),
                   ),
                   title: Text(pokemon.name),
                   subtitle: Text(pokemon.id.toString()),

@@ -18,10 +18,10 @@ class Failure extends Equatable {
       if (exception is DioError) {
         return error.message;
       } else {
-        return AppStrings.shared.unknownError;
+        return AppStrings.unknownError;
       }
     } catch (ex) {
-      return AppStrings.shared.unknownError;
+      return AppStrings.unknownError;
     }
   }
 }

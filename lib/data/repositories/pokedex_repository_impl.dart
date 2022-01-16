@@ -1,8 +1,8 @@
 import 'package:dartz/dartz.dart';
 import 'package:pokedex/data/data_sources/pokedex_data_source.dart';
 import 'package:pokedex/domain/entities/failure.dart';
-import 'package:pokedex/domain/entities/name_url_response.dart';
 import 'package:pokedex/domain/entities/pokemon.dart';
+import 'package:pokedex/domain/entities/pokemon_type.dart';
 import 'package:pokedex/domain/repositories/pokedex_repository.dart';
 
 class PokedexRepositoryImpl implements PokedexRepository {
@@ -11,7 +11,7 @@ class PokedexRepositoryImpl implements PokedexRepository {
   const PokedexRepositoryImpl({required this.dataSource});
 
   @override
-  Future<Either<Failure, List<NameUrlResponse>>> getTypes() async {
+  Future<Either<Failure, List<PokemonType>>> getTypes() async {
     try {
       final result = await dataSource.getTypes();
       return Right(result);

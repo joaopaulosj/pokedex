@@ -7,18 +7,25 @@ class PokemonModel extends Pokemon {
     required int id,
     required String name,
     required String imageUrl,
-    String? url,
+    required String url,
+    double? height,
+    double? weight,
   }) : super(
           id: id,
           name: name,
           imageUrl: imageUrl,
           url: url,
+          height: height,
+          weight: weight,
         );
 
   factory PokemonModel.fromJson(Map<String, dynamic> json) {
     return PokemonModel(
       id: json['id'],
       name: json['name'],
+      weight: json['weight'] / 10,
+      height: json['height'] / 10,
+      url: '${AppNetwork.basePokemonUrl}/${json['id']}',
       imageUrl: '${AppNetwork.baseSpriteUrl}/${json['id']}.png',
     );
   }
