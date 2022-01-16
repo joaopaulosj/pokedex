@@ -4,6 +4,9 @@ import 'package:pokedex/domain/entities/pokemon.dart';
 import 'package:pokedex/domain/entities/pokemon_type.dart';
 import 'package:pokedex/utils/string_utils.dart';
 
+const maxStat = 300.0;
+const maxExperience = 500.0;
+
 class PokemonModel extends Pokemon {
   const PokemonModel({
     required int id,
@@ -37,18 +40,18 @@ class PokemonModel extends Pokemon {
     return PokemonModel(
       id: json['id'],
       name: json['name'],
+      weight: json['weight'] / 10,
+      height: json['height'] / 10,
+      hp: json['stats'][0]['base_stat'] / maxStat,
+      speed: json['stats'][5]['base_stat'] / maxStat,
+      attack: json['stats'][1]['base_stat'] / maxStat,
+      defense: json['stats'][2]['base_stat'] / maxStat,
+      experience: json['base_experience'] / maxExperience,
+      url: '${AppNetwork.basePokemonUrl}/${json['id']}',
+      imageUrl: '${AppNetwork.baseSpriteUrl}/${json['id']}.png',
       types: List.from(json['types'])
           .map((e) => PokemonTypeModel.fromJson(e['type']))
           .toList(),
-      weight: json['weight'] / 10,
-      height: json['height'] / 10,
-      url: '${AppNetwork.basePokemonUrl}/${json['id']}',
-      imageUrl: '${AppNetwork.baseSpriteUrl}/${json['id']}.png',
-      hp: json['stats'][0]['base_stat'] / 300.0,
-      attack: json['stats'][1]['base_stat'] / 300.0,
-      defense: json['stats'][2]['base_stat'] / 300.0,
-      speed: json['stats'][5]['base_stat'] / 300.0,
-      experience: json['base_experience'] / 500.0,
     );
   }
 

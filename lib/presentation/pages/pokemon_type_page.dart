@@ -1,4 +1,3 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -7,6 +6,8 @@ import 'package:pokedex/constants/app_dimens.dart';
 import 'package:pokedex/domain/entities/ui_state.dart';
 import 'package:pokedex/presentation/cubits/pokemon_type_cubit.dart';
 import 'package:pokedex/presentation/widgets/failure_widget.dart';
+import 'package:pokedex/presentation/widgets/gradient_container.dart';
+import 'package:pokedex/presentation/widgets/pokemon_card.dart';
 
 class PokemonTypePage extends StatelessWidget {
   const PokemonTypePage({Key? key}) : super(key: key);
@@ -43,17 +44,8 @@ class _PageContentState extends State<_PageContent> {
         backgroundColor: AppColors.typeColor(_cubit.pokemonType),
         elevation: 0.0,
       ),
-      body: Container(
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-            colors: [
-              AppColors.typeColor(_cubit.pokemonType),
-              AppColors.typeColor(_cubit.pokemonType).withOpacity(0.6),
-            ],
-          ),
-        ),
+      body: GradientContainer(
+        pokemonType: _cubit.pokemonType,
         child: BlocBuilder<PokemonTypeCubit, PokemonTypeState>(
           bloc: _cubit,
           buildWhen: (prev, curr) => prev.uiState != curr.uiState,
@@ -74,33 +66,9 @@ class _PageContentState extends State<_PageContent> {
                 ),
                 itemBuilder: (context, index) {
                   final pokemon = state.pokemons[index];
-                  return Card(
-                    clipBehavior: Clip.antiAlias,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(8.0),
-                    ),
-                    elevation: 4.0,
-                    child: InkWell(
-                      onTap: () => _cubit.onPokemonSelected(pokemon),
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Column(
-                          children: [
-                            const SizedBox(height: kMarginSmall),
-                            Text('#${pokemon.id}'),
-                            Expanded(
-                              child: Hero(
-                                tag: pokemon.imageUrl,
-                                child: CachedNetworkImage(
-                                  imageUrl: pokemon.imageUrl,
-                                  fit: BoxFit.fill,
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
+                  return PokemonCard(
+                    pokemon: pokemon,
+                    onTap: () => _cubit.onPokemonSelected(pokemon),
                   );
                 },
               );

@@ -1,13 +1,12 @@
-import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:pokedex/constants/app_colors.dart';
 import 'package:pokedex/constants/app_dimens.dart';
 import 'package:pokedex/constants/app_strings.dart';
 import 'package:pokedex/domain/entities/ui_state.dart';
 import 'package:pokedex/presentation/cubits/pokemon_types_cubit.dart';
 import 'package:pokedex/presentation/widgets/failure_widget.dart';
+import 'package:pokedex/presentation/widgets/pokemon_type_card.dart';
 
 class PokemonTypesPage extends StatelessWidget {
   const PokemonTypesPage({Key? key}) : super(key: key);
@@ -60,43 +59,9 @@ class _PageContentState extends State<_PageContent> {
               ),
               itemBuilder: (context, index) {
                 final type = state.pokemonTypes[index];
-                return Card(
-                  clipBehavior: Clip.antiAlias,
-                  elevation: 8.0,
-                  color: AppColors.typeColor(type),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(8.0),
-                  ),
-                  child: InkWell(
-                    onTap: () => _cubit.onPokemonTypeSelected(type),
-                    child: Stack(
-                      alignment: Alignment.center,
-                      children: [
-                        SizedBox(
-                          height: 100,
-                          child: Center(
-                            child: AutoSizeText(
-                              type.name,
-                              style: TextStyle(
-                                color: Colors.black.withOpacity(0.04),
-                                fontSize: 180.0,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                          ),
-                        ),
-                        Text(
-                          type.name,
-                          textAlign: TextAlign.center,
-                          style: const TextStyle(
-                            color: Colors.white,
-                            fontSize: 28.0,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
+                return PokemonTypeCard(
+                  pokemonType: type,
+                  onTap: () => _cubit.onPokemonTypeSelected(type),
                 );
               },
             );

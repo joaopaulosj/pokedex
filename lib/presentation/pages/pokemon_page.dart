@@ -37,46 +37,46 @@ class _PageContentState extends State<_PageContent> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<PokemonCubit, PokemonState>(
-      bloc: _cubit,
-      buildWhen: (prev, curr) => prev.uiState != curr.uiState,
-      builder: (context, state) {
-        return Scaffold(
-          appBar: AppBar(
-            title: Text(
-              StringUtils.capitalize(state.pokemon.name),
-              style: const TextStyle(
-                fontWeight: FontWeight.w800,
-              ),
-            ),
-            centerTitle: true,
-            backgroundColor: _cubit.color,
-            elevation: 0.0,
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(
+          StringUtils.capitalize(_cubit.pokemon.name),
+          style: const TextStyle(
+            fontWeight: FontWeight.w800,
           ),
-          body: Container(
-            width: double.infinity,
-            decoration: BoxDecoration(
-              gradient: LinearGradient(
-                begin: Alignment.topCenter,
-                end: Alignment.bottomCenter,
-                colors: [
-                  _cubit.color.withOpacity(1.0),
-                  _cubit.color.withOpacity(0.5),
-                ],
+        ),
+        centerTitle: true,
+        backgroundColor: _cubit.color,
+        elevation: 0.0,
+      ),
+      body: Container(
+        width: double.infinity,
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            colors: [
+              _cubit.color.withOpacity(1.0),
+              _cubit.color.withOpacity(0.5),
+            ],
+          ),
+        ),
+        child: Column(
+          children: [
+            Hero(
+              tag: _cubit.pokemon.imageUrl,
+              child: CachedNetworkImage(
+                imageUrl: _cubit.pokemon.imageUrl,
+                fit: BoxFit.fitHeight,
+                height: 200,
               ),
             ),
-            child: Column(
-              children: [
-                Hero(
-                  tag: state.pokemon.imageUrl,
-                  child: CachedNetworkImage(
-                    imageUrl: state.pokemon.imageUrl,
-                    fit: BoxFit.fitHeight,
-                    height: 200,
-                  ),
-                ),
-                Expanded(
-                  child: Padding(
+            Expanded(
+              child: BlocBuilder<PokemonCubit, PokemonState>(
+                bloc: _cubit,
+                buildWhen: (prev, curr) => prev.uiState != curr.uiState,
+                builder: (context, state) {
+                  return Padding(
                     padding: const EdgeInsets.symmetric(
                       horizontal: kMarginDefault,
                     ),
@@ -104,14 +104,14 @@ class _PageContentState extends State<_PageContent> {
                         },
                       ),
                     ),
-                  ),
-                ),
-                const SizedBox(height: kMarginBig),
-              ],
+                  );
+                },
+              ),
             ),
-          ),
-        );
-      },
+            const SizedBox(height: kMarginBig),
+          ],
+        ),
+      ),
     );
   }
 }
