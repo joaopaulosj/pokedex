@@ -1,5 +1,7 @@
 import 'package:pokedex/constants/app_network.dart';
+import 'package:pokedex/data/model/pokemon_type_model.dart';
 import 'package:pokedex/domain/entities/pokemon.dart';
+import 'package:pokedex/domain/entities/pokemon_type.dart';
 import 'package:pokedex/utils/string_utils.dart';
 
 class PokemonModel extends Pokemon {
@@ -8,6 +10,7 @@ class PokemonModel extends Pokemon {
     required String name,
     required String imageUrl,
     required String url,
+    List<PokemonType> types = const [],
     double? height,
     double? weight,
   }) : super(
@@ -15,6 +18,7 @@ class PokemonModel extends Pokemon {
           name: name,
           imageUrl: imageUrl,
           url: url,
+          types: types,
           height: height,
           weight: weight,
         );
@@ -23,6 +27,9 @@ class PokemonModel extends Pokemon {
     return PokemonModel(
       id: json['id'],
       name: json['name'],
+      types: List.from(json['types'])
+          .map((e) => PokemonTypeModel.fromJson(e['type']))
+          .toList(),
       weight: json['weight'] / 10,
       height: json['height'] / 10,
       url: '${AppNetwork.basePokemonUrl}/${json['id']}',

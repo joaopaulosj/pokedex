@@ -13,7 +13,7 @@ class PokedexDataSource {
   Future<List<PokemonType>> getTypes() async {
     final result = await dio.get(AppNetwork.typesUrl);
     final types = List.from(result.data['results'])
-        .map((e) => NameUrlResponseModel.fromJson(e))
+        .map((e) => PokemonTypeModel.fromJson(e))
         .toList();
     return types;
   }

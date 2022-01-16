@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:pokedex/constants/app_colors.dart';
 import 'package:pokedex/constants/app_dimens.dart';
 import 'package:pokedex/constants/app_strings.dart';
 import 'package:pokedex/domain/entities/pokemon.dart';
@@ -55,6 +56,7 @@ class _PageContentState extends State<_PageContent> {
             elevation: 0.0,
           ),
           body: Container(
+            width: double.infinity,
             decoration: BoxDecoration(
               gradient: LinearGradient(
                 begin: Alignment.topCenter,
@@ -171,7 +173,29 @@ class _PokemonInfo extends StatelessWidget {
               ),
             ],
           ),
-          Expanded(child: Container()),
+          const SizedBox(height: kMarginBig),
+          Wrap(
+            spacing: 8.0,
+            alignment: WrapAlignment.center,
+            children: pokemon.types.map((e) {
+              return Container(
+                decoration: BoxDecoration(
+                  color: AppColors.typeColor(e),
+                  borderRadius: BorderRadius.circular(4.0),
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(
+                    vertical: 4,
+                    horizontal: 8,
+                  ),
+                  child: Text(
+                    e.name,
+                    style: const TextStyle(color: Colors.white),
+                  ),
+                ),
+              );
+            }).toList(),
+          ),
         ],
       ),
     );
