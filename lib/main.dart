@@ -21,7 +21,7 @@ class AppWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: AppStrings.appName,
-      theme: ThemeData(primarySwatch: Colors.blue).copyWith(
+      theme: ThemeData(primarySwatch: Colors.indigo).copyWith(
         textTheme: GoogleFonts.pressStart2pTextTheme(),
       ),
       debugShowCheckedModeBanner: false,
