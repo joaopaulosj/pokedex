@@ -13,6 +13,11 @@ class PokemonModel extends Pokemon {
     List<PokemonType> types = const [],
     double? height,
     double? weight,
+    double speed = 0.0,
+    double defense = 0.0,
+    double attack = 0.0,
+    double experience = 0.0,
+    double hp = 0.0,
   }) : super(
           id: id,
           name: name,
@@ -21,6 +26,11 @@ class PokemonModel extends Pokemon {
           types: types,
           height: height,
           weight: weight,
+          speed: speed,
+          defense: defense,
+          attack: attack,
+          experience: experience,
+          hp: hp,
         );
 
   factory PokemonModel.fromJson(Map<String, dynamic> json) {
@@ -34,6 +44,11 @@ class PokemonModel extends Pokemon {
       height: json['height'] / 10,
       url: '${AppNetwork.basePokemonUrl}/${json['id']}',
       imageUrl: '${AppNetwork.baseSpriteUrl}/${json['id']}.png',
+      hp: json['stats'][0]['base_stat'] / 300.0,
+      attack: json['stats'][1]['base_stat'] / 300.0,
+      defense: json['stats'][2]['base_stat'] / 300.0,
+      speed: json['stats'][5]['base_stat'] / 300.0,
+      experience: json['base_experience'] / 1000.0,
     );
   }
 

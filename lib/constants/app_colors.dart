@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import 'package:pokedex/constants/app_strings.dart';
 import 'package:pokedex/domain/entities/pokemon_type.dart';
 
 class AppColors {
@@ -45,6 +46,21 @@ class AppColors {
         return const Color(0xFF000000);
       default:
         return const Color(0xFF8BC34A);
+    }
+  }
+
+  static Color statColor(String stat) {
+    switch (stat) {
+      case AppStrings.attack:
+        return const Color(0xFFF44336);
+      case AppStrings.defense:
+        return const Color(0xFF2196F3);
+      case AppStrings.speed:
+        return const Color(0xFF9C27B0);
+      case AppStrings.hp:
+        return const Color(0xFF795548);
+      default:
+        return const Color(0xFF4CAF50);
     }
   }
 }

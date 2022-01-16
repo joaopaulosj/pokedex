@@ -2,13 +2,11 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:pokedex/constants/app_colors.dart';
 import 'package:pokedex/constants/app_dimens.dart';
-import 'package:pokedex/constants/app_strings.dart';
-import 'package:pokedex/domain/entities/pokemon.dart';
 import 'package:pokedex/domain/entities/ui_state.dart';
 import 'package:pokedex/presentation/cubits/pokemon_cubit.dart';
 import 'package:pokedex/presentation/widgets/failure_widget.dart';
+import 'package:pokedex/presentation/widgets/pokemon_info_widget.dart';
 import 'package:pokedex/utils/string_utils.dart';
 
 class PokemonPage extends StatelessWidget {
@@ -79,11 +77,13 @@ class _PageContentState extends State<_PageContent> {
                 ),
                 Expanded(
                   child: Padding(
-                    padding: const EdgeInsets.all(kMarginDefault),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: kMarginDefault,
+                    ),
                     child: Card(
                       elevation: 8.0,
                       shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(32.0),
+                        borderRadius: BorderRadius.circular(16.0),
                       ),
                       child: Builder(
                         builder: (context) {
@@ -92,7 +92,7 @@ class _PageContentState extends State<_PageContent> {
                               child: CircularProgressIndicator(),
                             );
                           } else if (state.uiState == UIState.success) {
-                            return _PokemonInfo(pokemon: state.pokemon);
+                            return PokemonInfoWidget(pokemon: state.pokemon);
                           } else if (state.uiState == UIState.failure) {
                             return FailureWidget(
                               failure: state.failure,
@@ -106,98 +106,12 @@ class _PageContentState extends State<_PageContent> {
                     ),
                   ),
                 ),
+                const SizedBox(height: kMarginBig),
               ],
             ),
           ),
         );
       },
-    );
-  }
-}
-
-class _PokemonInfo extends StatelessWidget {
-  final Pokemon pokemon;
-
-  const _PokemonInfo({
-    required this.pokemon,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(kMarginBig),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              Column(
-                children: [
-                  const Text(
-                    AppStrings.height,
-                    style: TextStyle(
-                      fontWeight: FontWeight.w800,
-                      fontSize: 10,
-                    ),
-                  ),
-                  const SizedBox(height: kMarginDefault),
-                  Text(
-                    '${pokemon.height}m',
-                    style: const TextStyle(
-                      fontWeight: FontWeight.w800,
-                      fontSize: 16,
-                    ),
-                  ),
-                ],
-              ),
-              Column(
-                children: [
-                  const Text(
-                    AppStrings.weight,
-                    style: TextStyle(
-                      fontWeight: FontWeight.w800,
-                      fontSize: 10,
-                    ),
-                  ),
-                  const SizedBox(height: kMarginDefault),
-                  Text(
-                    '${pokemon.weight}kg',
-                    style: const TextStyle(
-                      fontWeight: FontWeight.w800,
-                      fontSize: 16,
-                    ),
-                  ),
-                ],
-              ),
-            ],
-          ),
-          const SizedBox(height: kMarginBig),
-          Wrap(
-            spacing: 8.0,
-            alignment: WrapAlignment.center,
-            children: pokemon.types.map((e) {
-              return Container(
-                decoration: BoxDecoration(
-                  color: AppColors.typeColor(e),
-                  borderRadius: BorderRadius.circular(4.0),
-                ),
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(
-                    vertical: 4,
-                    horizontal: 8,
-                  ),
-                  child: Text(
-                    e.name,
-                    style: const TextStyle(color: Colors.white),
-                  ),
-                ),
-              );
-            }).toList(),
-          ),
-        ],
-      ),
     );
   }
 }
