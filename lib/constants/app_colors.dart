@@ -19,9 +19,9 @@ class AppColors {
       case 'bug':
         return const Color(0xFF388E3C);
       case 'ghost':
-        return const Color(0xFF607D8B);
+        return const Color(0xFF616161);
       case 'steel':
-        return const Color(0xFF795548);
+        return const Color(0xFF455A64);
       case 'fire':
         return const Color(0xFFF44336);
       case 'water':
@@ -45,7 +45,7 @@ class AppColors {
       case 'shadow':
         return const Color(0xFF000000);
       default:
-        return const Color(0xFF8BC34A);
+        return const Color(0xFF887777);
     }
   }
 

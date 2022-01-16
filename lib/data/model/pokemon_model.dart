@@ -48,7 +48,7 @@ class PokemonModel extends Pokemon {
       attack: json['stats'][1]['base_stat'] / 300.0,
       defense: json['stats'][2]['base_stat'] / 300.0,
       speed: json['stats'][5]['base_stat'] / 300.0,
-      experience: json['base_experience'] / 1000.0,
+      experience: json['base_experience'] / 500.0,
     );
   }
 

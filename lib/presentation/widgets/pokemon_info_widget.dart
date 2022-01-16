@@ -30,7 +30,7 @@ class PokemonInfoWidget extends StatelessWidget {
                     AppStrings.height,
                     style: TextStyle(fontWeight: FontWeight.w800, fontSize: 10),
                   ),
-                  const SizedBox(height: kMarginDefault),
+                  const SizedBox(height: kMarginSmall),
                   Text(
                     '${pokemon.height}m',
                     style: const TextStyle(
@@ -49,7 +49,7 @@ class PokemonInfoWidget extends StatelessWidget {
                       fontSize: 10,
                     ),
                   ),
-                  const SizedBox(height: kMarginDefault),
+                  const SizedBox(height: kMarginSmall),
                   Text(
                     '${pokemon.weight}kg',
                     style: const TextStyle(
@@ -94,7 +94,6 @@ class PokemonInfoWidget extends StatelessWidget {
           StatBar(label: AppStrings.experience, progress: pokemon.experience),
           const SizedBox(height: kMarginDefault),
           StatBar(label: AppStrings.hp, progress: pokemon.hp),
-          const Spacer(),
         ],
       ),
     );

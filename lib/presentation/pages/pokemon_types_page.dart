@@ -63,6 +63,7 @@ class _PageContentState extends State<_PageContent> {
                 return Card(
                   clipBehavior: Clip.antiAlias,
                   elevation: 8.0,
+                  color: AppColors.typeColor(type),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(8.0),
                   ),
@@ -71,10 +72,6 @@ class _PageContentState extends State<_PageContent> {
                     child: Stack(
                       alignment: Alignment.center,
                       children: [
-                        Container(
-                          color: AppColors.typeColor(type),
-                          height: 100.0,
-                        ),
                         SizedBox(
                           height: 100,
                           child: Center(
